@@ -9,6 +9,15 @@
 # All "bidcheck_" entries
 # All "dockercheck_" entries
 
+####################################################################
+# This script will:
+# 1. Delete existing OT-NodeWatch directory
+# 2. Clone git.
+# 3. Copy edited config.
+# 4. Delete any existing cron jobs for bid_watch/docker_watch.
+# 5. Add cron jobs for both with current configured values.
+# 6. Stop Cosmic_Overlay ping script if running.
+
 - name: Install Monitors
   hosts: all
   vars:
@@ -25,6 +34,11 @@
   gather_facts: no
 
   tasks:
+    - name: Delete existing OT-NodeWatch folder
+      file:
+        path: /root/OT-NodeWatch
+        state: absent
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
@@ -68,3 +82,8 @@
         month: "{{ dockercheck_month }}"
         weekday: "{{ dockercheck_weekday }}"
         job: "/root/OT-NodeWatch/docker_check/docker_check.sh"
+
+    - name: Stop Cosmic_Overlay ping script (if present)
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: forever stop ping.js
