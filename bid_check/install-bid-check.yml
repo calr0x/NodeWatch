@@ -32,6 +32,14 @@
         group: root
         mode: '0600'
 
+    - name: Install bid_check/bid_check.sh
+      copy:
+        src: ~/OT-NodeWatch/bid_check/bid_check.sh
+        dest: /root/OT-NodeWatch/bid_check/bid_check.sh
+        owner: root
+        group: root
+        mode: '0700'
+
     - name: Delete existing monitor (bid check) schedule from cron
       cron:
         name: Monitor Bid Check
