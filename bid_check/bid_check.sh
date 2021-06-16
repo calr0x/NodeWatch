@@ -8,7 +8,7 @@
 
 BID_INTERVAL="15m"
 
-BIDS=$(docker logs --since $BID_INTERVAL otnode | grep chosen | wc -l)
+BIDS=$(docker logs --since $BID_INTERVAL otnode | grep Accepting | wc -l)
 echo $BIDS
 
 if [ $BIDS -eq 0 ]; then
