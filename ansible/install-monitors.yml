@@ -84,6 +84,7 @@
         job: "/root/OT-NodeWatch/docker_check/docker_check.sh"
 
     - name: Stop Cosmic_Overlay ping script (if present)
+      ignore_errors: yes
       command:
         chdir: /root/Cosmic_OverlayV2/cron-jobs-node
         cmd: forever stop ping.js
