@@ -10,7 +10,7 @@
 - name: Install Monitors
   hosts: all
   vars:
-    bidcheck_minute: '*/15' # Checks every 15 minutes
+    bidcheck_minute: '0' # Checks every 15 minutes
     bidcheck_hour: '*'
     bidcheck_day: '*'
     bidcheck_month: '*'
