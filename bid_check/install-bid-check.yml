@@ -2,7 +2,7 @@
 
 # This is a collection of monitors to check various states at regular scheduled intervals.
 # Monitors performed:
-#  Check for bids last 15 minutes
+#  Check for bids last 1 hour
 
 # Settings to edit:
 # All "bidcheck_" entries
@@ -10,7 +10,7 @@
 - name: Install Monitors
   hosts: all
   vars:
-    bidcheck_minute: '0' # Checks every 15 minutes
+    bidcheck_minute: '0' # Checks every 1 hour
     bidcheck_hour: '*'
     bidcheck_day: '*'
     bidcheck_month: '*'
