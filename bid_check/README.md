@@ -1,4 +1,4 @@
-__docker_check.sh__
+__bid_check.sh__
 
 This script checks that the docker container "otnode" is running. If this isn't
 running then the node is down.
@@ -15,7 +15,7 @@ To schedule this job in the servers Cron:
 3. Press "1" (if asked)
 4. On a new line paste the following:
 
-*/1 * * * * /root/OT-NodeWatch/docker_check/docker_check.sh
+0 * * * * /root/OT-NodeWatch/bid_check/bid_check.sh
 
 5. ctrl+s
 6. ctrl+x
