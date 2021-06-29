@@ -15,3 +15,18 @@ __docker_check__:
 ---
 
 __Installation:__
+
+Log into server as root.
+```
+cd
+```
+```
+git clone https://github.com/calr0x/OT-NodeWatch.git
+```
+```
+nano config.sh
+```
+Replace the values for both lines with your Telegram token and chat_id.
+```
+ctrl+s ctrl+x
+```
