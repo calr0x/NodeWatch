@@ -31,7 +31,7 @@ Replace the values for both lines with your Telegram token and chat_id.
 ctrl+s ctrl+x
 ```
 
-- __bid_check__: Default check is every hour.
+__bid_check__: Default check is every hour.
 
 ```
 crontab -e
@@ -44,7 +44,7 @@ Press '1' (if asked) to select nano as the editor.
 ctrl+s ctrl+x
 ```
 
-- __docker_check__: Default check is every 5 minutes.
+__docker_check__: Default check is every 5 minutes.
 ```
 crontab -e
 ```
