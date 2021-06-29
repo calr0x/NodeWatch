@@ -14,7 +14,7 @@ __docker_check__:
 
 ---
 
-__Installation:__
+__Manual installation:__
 
 Log into server as root.
 ```
@@ -27,6 +27,31 @@ git clone https://github.com/calr0x/OT-NodeWatch.git
 nano config.sh
 ```
 Replace the values for both lines with your Telegram token and chat_id.
+```
+ctrl+s ctrl+x
+```
+
+- __bid_check__: Default check is every hour.
+
+```
+crontab -e
+```
+Press '1' (if asked) to select nano as the editor.
+```
+0 * * * * /root/OT-NodeWatch/bid_check/bid_check.sh
+```
+```
+ctrl+s ctrl+x
+```
+
+- __docker_check__: Default check is every 5 minutes.
+```
+crontab -e
+```
+Press '1' (if asked) to select nano as the editor.
+```
+*/5 * * * * /root/OT-NodeWatch/docker_check/docker_check.sh
+```
 ```
 ctrl+s ctrl+x
 ```
