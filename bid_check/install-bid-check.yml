@@ -18,6 +18,10 @@
   gather_facts: no
 
   tasks:
+    - name: Delete existing OT-Nodewatch directory
+      file:
+        path: /root/OT-NodeWatch
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
