@@ -27,12 +27,11 @@
 
     - name: Install disk_space.sh
       copy:
-        src: ~/OT-NodeWatch/disk_space/disk_space.sh
-        dest: /root/OT-NodeWatch/disk_space/disk_space.sh
+        src: ~/OT-NodeWatch/disk_check/disk_check.sh
+        dest: /root/OT-NodeWatch/disk_check/disk_check.sh
         owner: root
         group: root
-        mode: '0600'
-
+        
     - name: Delete existing monitor (docker check) schedule from cron
       cron:
         name: Monitor Disk Check
@@ -46,4 +45,4 @@
         day: "{{ diskcheck_day }}"
         month: "{{ diskcheck_month }}"
         weekday: "{{ diskcheck_weekday }}"
-        job: "/root/OT-NodeWatch/disk_space/disk_space.sh"
+        job: "/root/OT-NodeWatch/disk_check/disk_check.sh"

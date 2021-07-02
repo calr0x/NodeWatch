@@ -14,7 +14,7 @@ crontab -e
 Press "1" (if asked) to select nano as the editor
 On a new line paste the following:
 ```
-0 * * * * /root/OT-NodeWatch/disk_space/disk_check.sh
+0 * * * * /root/OT-NodeWatch/disk_check/disk_check.sh
 ```
 ```
 ctrl+s
