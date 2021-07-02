@@ -27,7 +27,7 @@
 
     - name: Install disk_space.sh
       copy:
-        src: ~/OT-NodeWatch/disk_check/disk_check.sh
+        src: /root/OT-NodeWatch/disk_check/disk_check.sh
         dest: /root/OT-NodeWatch/disk_check/disk_check.sh
         owner: root
         group: root
