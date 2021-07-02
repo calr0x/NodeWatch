@@ -5,9 +5,10 @@ This script checks the space used on /dev/sda. If it is equal-to or over the val
 This script uses the config.sh file in /root/OT-Nodewatch. If this is already set for another script in
 OT-NodeWatch then you're good to go.
 
-To schedule this job in the servers Cron:
+To schedule this job in the servers Cron:  
 
 Log-in as root
+
 ```
 crontab -e
 ```
