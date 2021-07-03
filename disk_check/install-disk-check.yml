@@ -25,6 +25,14 @@
         dest: /root/OT-NodeWatch
         force: yes
 
+    - name: Install config.sh
+      copy:
+        src: /root/OT-NodeWatch/config.sh
+        dest: /root/OT-NodeWatch/config.sh
+        owner: root
+        group: root
+        mode: '0600'
+
     - name: Install disk_space.sh
       copy:
         src: /root/OT-NodeWatch/disk_check/disk_check.sh
