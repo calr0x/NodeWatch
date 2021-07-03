@@ -13,6 +13,9 @@ __docker_check__:
 - Checks that the "otnode" docker container is running every 5 minutes by default (changable).  
 - Checks if the node has updated  
 
+__disk_check__:
+- Checks the disk space used every day by default (changable).  
+
 ---
 
 __Manual installation:__
@@ -31,8 +34,8 @@ Replace the values for both lines with your Telegram token and chat_id.
 ```
 ctrl+s ctrl+x
 ```
-
-__bid_check__: Default check is every hour.
+---
+## __bid_check__: Default check is every hour.
 
 ```
 crontab -e
@@ -44,8 +47,8 @@ Press '1' (if asked) to select nano as the editor.
 ```
 ctrl+s ctrl+x
 ```
-
-__docker_check__: Default check is every 5 minutes.
+---
+## __docker_check__: Default check is every 5 minutes.
 ```
 crontab -e
 ```
@@ -56,3 +59,16 @@ Press '1' (if asked) to select nano as the editor.
 ```
 ctrl+s ctrl+x
 ```
+---
+## __disk_check__: Default check is once a day.
+```
+crontab -e
+```
+Press '1' (if asked) to select nano as the editor.
+```
+0 0 * * * /root/OT-NodeWatch/disk_check/disk_check.sh
+```
+```
+ctrl+s ctrl+x
+```
+---

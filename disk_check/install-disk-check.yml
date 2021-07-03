@@ -12,7 +12,7 @@
   hosts: all
   vars:
     diskcheck_minute: '0' # Checks every day
-    diskcheck_hour: '*'
+    diskcheck_hour: '0'
     diskcheck_day: '*'
     diskcheck_month: '*'
     diskcheck_weekday: '*'
