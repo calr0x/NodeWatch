@@ -7,6 +7,8 @@
 # Settings to edit:
 # All "bidcheck_" entries
 
+# THIS ONLY WORKS ON DOCKERLESS INSTALLATIONS.
+
 - name: Install Monitors
   hosts: all
   vars:
