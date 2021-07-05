@@ -2,7 +2,8 @@
 
 # This script checks the logs for "Accepting" which indicates a bid.
 # Setting to change:
-# BID_INTERVAL: Set this to how far back in minutes to search the log for mentions of "Accepting".
+# BID_CHECK_ENABLED: Set to false to disable bid notifications.
+# CHECK_INTERVAL: Set this to how far back to search the log for mentions of "Accepting".
 # This value should match the CRON schedule. For example, Every 1 hour
 # CRON should run this script which checks the logs for the past 1 hour.
 
