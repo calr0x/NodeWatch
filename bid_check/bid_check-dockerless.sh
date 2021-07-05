@@ -18,7 +18,8 @@ JOBS=$(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep 've been ch
 OFFER_ID=($(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep 've been chosen' | grep -Eo '0x[a-z0-9]+'))
 
 #echo Array: ${#OFFER_ID[@]}
-if [ $BID_CHECK_ENABLED == "true" ] then;
+if [ $BID_CHECK_ENABLED == "true" ]
+then
   for i in "${OFFER_ID[@]}"
   do
     TOKEN_ARRAY=($(curl -s -X GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | cut -d',' -f 54 | cut -d'"' -f 4))
