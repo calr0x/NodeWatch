@@ -6,8 +6,8 @@
 # This value should match the CRON schedule. For example, Every 1 hour
 # CRON should run this script which checks the logs for the past 1 hour.
 
-#!/bin/bash
 CHECK_INTERVAL="1 hour ago"
+BID_CHECK_ENABLED="true"
 
 BIDS=$(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep Accepting | wc -l)
 #echo Bids: $BIDS
@@ -19,11 +19,7 @@ OFFER_ID=($(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep 've be
 
 #echo Array: ${#OFFER_ID[@]}
 
-if [ $BIDS == 1 ]; then
-  /root/OT-NodeWatch/data/send.sh "Job awarded"
-fi
-
-if [ $BIDS -ge 2 ]; then
+if [ $BID_CHECK_ENABLED -eq "true" ]; then
   for i in "${OFFER_ID[@]}"
   do
     TOKEN_ARRAY=($(curl -s -X GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | cut -d',' -f 54 | cut -d'"' -f 4))
