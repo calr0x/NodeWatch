@@ -27,8 +27,8 @@ if [ $BID_CHECK_ENABLED == "true" ]
 then
   for i in "${OFFER_ID[@]}"
   do
-    TOKEN_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/0x11c27fbecc3e384cdec966a6be83c97b2a1109ab1d4611eb118b9a5094b97a80" -H  "accept: text/plain" | jq '.TokenAmountPerHolder' | cut -d'"' -f2))
-    JOBTIME_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/0x11c27fbecc3e384cdec966a6be83c97b2a1109ab1d4611eb118b9a5094b97a80" -H  "accept: text/plain" | jq '.HoldingTimeInMinutes'))
+    TOKEN_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$OFFER_ID" -H  "accept: text/plain" | jq '.TokenAmountPerHolder' | cut -d'"' -f2))
+    JOBTIME_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$OFFER_ID" -H  "accept: text/plain" | jq '.HoldingTimeInMinutes'))
     DAYS=$(expr ${JOBTIME_ARRAY[@]} / 60 / 24)
     /root/OT-NodeWatch/data/send.sh "Job awarded: $DAYS days at ${TOKEN_ARRAY[@]} TRAC"
   done
