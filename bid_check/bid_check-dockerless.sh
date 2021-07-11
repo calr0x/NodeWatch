@@ -14,7 +14,7 @@ BIDS=$(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep Accepting |
 #echo Bids: $BIDS
 
 if [ $BIDS -eq 0 ]; then
-  /root/OT-NodeWatch/data/send.sh "Has not bid since $BID_INTERVAL"
+  /root/OT-NodeWatch/data/send.sh "Has not bid since $CHECK_INTERVAL"
 fi
 
 JOBS=$(journalctl -u otnode.service --since "$CHECK_INTERVAL" | grep 've been chosen' | wc -l)
@@ -27,8 +27,8 @@ if [ $BID_CHECK_ENABLED == "true" ]
 then
   for i in "${OFFER_ID[@]}"
   do
-    TOKEN_ARRAY=($(curl -s -X GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | cut -d',' -f 54 | cut -d'"' -f 4))
-    JOBTIME_ARRAY=($(curl -s -X GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | cut -d',' -f 53 | cut -d':' -f 2))
+    TOKEN_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | jq '.TokenAmountPerHolder' | cut -d'"' -f2))
+    JOBTIME_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | jq '.HoldingTimeInMinutes'))
     DAYS=$(expr ${JOBTIME_ARRAY[@]} / 60 / 24)
     /root/OT-NodeWatch/data/send.sh "Job awarded: $DAYS days at ${TOKEN_ARRAY[@]} TRAC"
   done
