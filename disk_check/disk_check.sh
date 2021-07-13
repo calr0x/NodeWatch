@@ -11,5 +11,5 @@ SPACE=$(sed 's|%||' <<< $SPACE)
 echo Disk space is $SPACE% full.
 
 if [ $SPACE -ge $SPACE_THRESHOLD ]; then
-  /root/OT-NodeWatch/data/send.sh "Disk space is $SPACE% full."
+  /root/OT-Settings/data/send.sh "Disk space is $SPACE% full."
 fi

@@ -39,16 +39,27 @@
         path: /root/OT-NodeWatch
         state: absent
 
+    - name: Delete existing OT-Settings folder
+      file:
+        path: /root/OT-Settings
+        state: absent
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
         dest: /root/OT-NodeWatch
         force: yes
 
+    - name: Clone OT-Settings git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-Settings.git'
+        dest: /root/OT-Settings
+        force: yes
+
     - name: Install config.sh
       copy:
-        src: ~/OT-NodeWatch/config.sh
-        dest: /root/OT-NodeWatch/config.sh
+        src: ~/OT-Settings/config.sh
+        dest: /root/OT-Settings/config.sh
         owner: root
         group: root
         mode: '0600'
@@ -82,9 +93,3 @@
         month: "{{ dockercheck_month }}"
         weekday: "{{ dockercheck_weekday }}"
         job: "/root/OT-NodeWatch/docker_check/docker_check.sh"
-
-    - name: Stop Cosmic_Overlay ping script (if present)
-      ignore_errors: yes
-      command:
-        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
-        cmd: forever stop ping.js
