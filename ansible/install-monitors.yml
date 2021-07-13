@@ -21,8 +21,8 @@
 - name: Install Monitors
   hosts: all
   vars:
-    bidcheck_minute: '*/15' # Checks every 15 minutes
-    bidcheck_hour: '*'
+    bidcheck_minute: '0' # Checks every 15 minutes
+    bidcheck_hour: '0'
     bidcheck_day: '*'
     bidcheck_month: '*'
     bidcheck_weekday: '*'
@@ -39,26 +39,34 @@
         path: /root/OT-NodeWatch
         state: absent
 
+    - name: Delete existing OT-Settings folder
+      file:
+        path: /root/OT-Settings
+        state: absent
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
         dest: /root/OT-NodeWatch
         force: yes
 
-    - name: Install config.sh
+    - name: Clone OT-Settings git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-Settings.git'
+        dest: /root/OT-Settings
+        force: yes
+
+    - name: Copy config file
       copy:
-        src: ~/OT-NodeWatch/config.sh
-        dest: /root/OT-NodeWatch/config.sh
-        owner: root
-        group: root
-        mode: '0600'
+        src: /root/OT-Settings/config.sh
+        dest: /root/OT-Settings
 
     - name: Delete existing monitor (bid check) schedule from cron
       cron:
         name: Monitor Bid Check
         state: absent
 
-    - name: Add monitor (bid check) schedule to cron (every 15 minutes)
+    - name: Add monitor (bid check) schedule to cron (every hour)
       cron:
         name: Monitor Bid Check
         minute: "{{ bidcheck_minute }}"
