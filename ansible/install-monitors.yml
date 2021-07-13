@@ -2,7 +2,7 @@
 
 # This is a collection of monitors to check various states at regular scheduled intervals.
 # Monitors performed:
-#  Check for bids last 15 minutes
+#  Check for bids every hour
 #  Check docker container "otnode" is running every 5 minutes
 
 # Settings to edit:
@@ -21,8 +21,8 @@
 - name: Install Monitors
   hosts: all
   vars:
-    bidcheck_minute: '0' # Checks every 15 minutes
-    bidcheck_hour: '0'
+    bidcheck_minute: '0' # Checks every hour
+    bidcheck_hour: '*'
     bidcheck_day: '*'
     bidcheck_month: '*'
     bidcheck_weekday: '*'
