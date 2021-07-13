@@ -7,6 +7,8 @@
 # Settings to edit:
 # All "bidcheck_" entries
 
+# THIS ONLY WORKS ON DOCKERLESS INSTALLATIONS.
+
 - name: Install Monitors
   hosts: all
   vars:
@@ -25,7 +27,7 @@
     - name: Delete existing OT-Settings directory
       file:
         path: /root/OT-Settings
-
+        
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
@@ -46,10 +48,10 @@
         group: root
         mode: '0600'
 
-    - name: Install bid_check/bid_check.sh
+    - name: Install bid_check/bid_check-dockerless.sh
       copy:
-        src: ~/OT-NodeWatch/bid_check/bid_check.sh
-        dest: /root/OT-NodeWatch/bid_check/bid_check.sh
+        src: ~/OT-NodeWatch/bid_check/bid_check-dockerless.sh
+        dest: /root/OT-NodeWatch/bid_check/bid_check-dockerless.sh
         owner: root
         group: root
         mode: '0700'
@@ -59,7 +61,7 @@
         name: Monitor Bid Check
         state: absent
 
-    - name: Add monitor (bid check) schedule to cron (every 15 minutes)
+    - name: Add monitor (bid check) schedule to cron
       cron:
         name: Monitor Bid Check
         minute: "{{ bidcheck_minute }}"
@@ -67,4 +69,4 @@
         day: "{{ bidcheck_day }}"
         month: "{{ bidcheck_month }}"
         weekday: "{{ bidcheck_weekday }}"
-        job: "/root/OT-NodeWatch/bid_check/bid_check.sh"
+        job: "/root/OT-NodeWatch/bid_check/bid_check-dockerless.sh"
