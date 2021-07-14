@@ -20,8 +20,8 @@
 
   tasks:
     - name: Delete existing OT-Nodewatch directory
-        file:
-          path: /root/OT-NodeWatch
+      file:
+        path: /root/OT-NodeWatch
 
     - name: Delete existing OT-Settings directory
       file:
@@ -34,10 +34,10 @@
         force: yes
 
     - name: Clone OT-Settings git repository
-    git:
-      repo: 'https://github.com/calr0x/OT-Settings.git'
-      dest: /root/OT-Settings
-      force: yes
+      git:
+        repo: 'https://github.com/calr0x/OT-Settings.git'
+        dest: /root/OT-Settings
+        force: yes
 
     - name: Install config.sh
       copy:
