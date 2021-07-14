@@ -44,6 +44,12 @@
         path: /root/OT-Settings
         state: absent
 
+    - name: Installing jq
+      apt:
+        name: jq
+        state: present
+        update_cache: yes
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
