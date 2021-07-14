@@ -9,6 +9,14 @@ It will also message when a job is awarded.
 
 This script uses the config.sh file in /root/OT-Settings. If this is already set then you're good to go!
 
+---
+__This script requires the following app to be installed:__
+
+```
+apt install jq
+```
+---
+
 To schedule this job in the servers Cron:
 
 Log-in as root
