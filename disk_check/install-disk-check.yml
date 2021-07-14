@@ -19,23 +19,37 @@
   gather_facts: no
 
   tasks:
+    - name: Delete existing OT-Nodewatch directory
+        file:
+          path: /root/OT-NodeWatch
+
+    - name: Delete existing OT-Settings directory
+      file:
+        path: /root/OT-Settings
+
     - name: Clone OT-NodeWatch git repository
       git:
         repo: 'https://github.com/calr0x/OT-NodeWatch.git'
         dest: /root/OT-NodeWatch
         force: yes
 
+    - name: Clone OT-Settings git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Settings.git'
+      dest: /root/OT-Settings
+      force: yes
+
     - name: Install config.sh
       copy:
-        src: /root/OT-NodeWatch/config.sh
-        dest: /root/OT-NodeWatch/config.sh
+        src: ~/OT-Settings/config.sh
+        dest: /root/OT-Settings/config.sh
         owner: root
         group: root
         mode: '0600'
 
-    - name: Install disk_space.sh
+    - name: Install disk_check.sh
       copy:
-        src: /root/OT-NodeWatch/disk_check/disk_check.sh
+        src: ~/OT-NodeWatch/disk_check/disk_check.sh
         dest: /root/OT-NodeWatch/disk_check/disk_check.sh
         owner: root
         group: root
