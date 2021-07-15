@@ -20,17 +20,7 @@
 
 - name: Install Monitors
   hosts: all
-  vars:
-    bidcheck_minute: '*/15' # Checks every 15 minutes
-    bidcheck_hour: '*'
-    bidcheck_day: '*'
-    bidcheck_month: '*'
-    bidcheck_weekday: '*'
-    dockercheck_minute: '*/5' # Checks every 5 minutes
-    dockercheck_hour: '*'
-    dockercheck_day: '*'
-    dockercheck_month: '*'
-    dockercheck_weekday: '*'
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:
@@ -75,27 +65,13 @@
         name: Monitor Bid Check
         state: absent
 
-    - name: Add monitor (bid check) schedule to cron (every 15 minutes)
+    - name: Add monitor (bid check) schedule to cron (every hour)
       cron:
         name: Monitor Bid Check
-        minute: "{{ bidcheck_minute }}"
-        hour: "{{ bidcheck_hour }}"
-        day: "{{ bidcheck_day }}"
-        month: "{{ bidcheck_month }}"
-        weekday: "{{ bidcheck_weekday }}"
+        minute: "{{ bid_check_minute }}"
+        hour: "{{ bid_check_hour }}"
+        day: "{{ bid_check_day }}"
+        month: "{{ bid_check_month }}"
+        weekday: "{{ bid_check_weekday }}"
         job: "/root/OT-NodeWatch/bid_check/bid_check.sh"
 
-    - name: Delete existing monitor (docker check) schedule from cron
-      cron:
-        name: Monitor Docker Check
-        state: absent
-
-    - name: Add monitor (Docker check) schedule to cron (every 5 minutes)
-      cron:
-        name: Monitor Docker Check
-        minute: "{{ dockercheck_minute }}"
-        hour: "{{ dockercheck_hour }}"
-        day: "{{ dockercheck_day }}"
-        month: "{{ dockercheck_month }}"
-        weekday: "{{ dockercheck_weekday }}"
-        job: "/root/OT-NodeWatch/docker_check/docker_check.sh"
