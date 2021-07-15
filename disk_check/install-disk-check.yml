@@ -9,13 +9,8 @@
 # All "diskcheck_" entries
 
 - name: Install Monitor
-  hosts: all
-  vars:
-    diskcheck_minute: '0' # Checks every day
-    diskcheck_hour: '0'
-    diskcheck_day: '*'
-    diskcheck_month: '*'
-    diskcheck_weekday: '*'
+  hosts: otnodes
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:
@@ -62,9 +57,9 @@
     - name: Add monitor (disk check) schedule to cron (once a day)
       cron:
         name: Monitor Disk Check
-        minute: "{{ diskcheck_minute }}"
-        hour: "{{ diskcheck_hour }}"
-        day: "{{ diskcheck_day }}"
-        month: "{{ diskcheck_month }}"
-        weekday: "{{ diskcheck_weekday }}"
+        minute: "{{ disk_check_minute }}"
+        hour: "{{ disk_check_hour }}"
+        day: "{{ disk_check_day }}"
+        month: "{{ disk_check_month }}"
+        weekday: "{{ disk_check_weekday }}"
         job: "/root/OT-NodeWatch/disk_check/disk_check.sh"

@@ -10,13 +10,8 @@
 # THIS ONLY WORKS ON DOCKERLESS INSTALLATIONS.
 
 - name: Install Monitors
-  hosts: all
-  vars:
-    bidcheck_minute: '0' # Checks every 1 hour
-    bidcheck_hour: '*'
-    bidcheck_day: '*'
-    bidcheck_month: '*'
-    bidcheck_weekday: '*'
+  hosts: otnodes
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:
@@ -48,10 +43,10 @@
         group: root
         mode: '0600'
 
-    - name: Install bid_check/bid_check-dockerless.sh
+    - name: Install bid_check.sh
       copy:
-        src: ~/OT-NodeWatch/bid_check/bid_check-dockerless.sh
-        dest: /root/OT-NodeWatch/bid_check/bid_check-dockerless.sh
+        src: ~/OT-NodeWatch/bid_check/bid_check.sh
+        dest: /root/OT-NodeWatch/bid_check/bid_check.sh
         owner: root
         group: root
         mode: '0700'
@@ -64,9 +59,9 @@
     - name: Add monitor (bid check) schedule to cron
       cron:
         name: Monitor Bid Check
-        minute: "{{ bidcheck_minute }}"
-        hour: "{{ bidcheck_hour }}"
-        day: "{{ bidcheck_day }}"
-        month: "{{ bidcheck_month }}"
-        weekday: "{{ bidcheck_weekday }}"
-        job: "/root/OT-NodeWatch/bid_check/bid_check-dockerless.sh"
+        minute: "{{ bid_check_minute }}"
+        hour: "{{ bid_check_hour }}"
+        day: "{{ bid_check_day }}"
+        month: "{{ bid_check_month }}"
+        weekday: "{{ bid_check_weekday }}"
+        job: "/root/OT-NodeWatch/bid_check/bid_check.sh"
