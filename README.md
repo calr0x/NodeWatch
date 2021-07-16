@@ -1,5 +1,5 @@
 # OT-NodeWatch 
-__IMPORTANT : This repository does not support docker nodes)__
+__IMPORTANT : This repository does not support docker nodes__
 
 __You must follow the instructions on OT-Settings repository before proceeding here__
 
@@ -24,6 +24,9 @@ __disk_check:__
 
 Log into server as root.
 ```
+apt install jq
+```
+```
 cd
 ```
 ```
@@ -37,7 +40,7 @@ crontab -e
 ```
 Press '1' (if asked) to select nano as the editor.
 ```
-0 * * * * /root/OT-NodeWatch/bid_check/bid_check.sh
+0 * * * * /root/OT-NodeWatch/bid_check.sh
 ```
 ```
 ctrl+s 
@@ -58,6 +61,18 @@ Press '1' (if asked) to select nano as the editor.
 ```
 ctrl+s
 ```
+```
+ctrl+x
+```
+\
+__Read the commented info inside each script for more details__
+```
+nano /root/OT-NodeWatch/bid_check.sh
+```
+```
+nano /root/OT-NodeWatch/disk_check.sh
+```
+when done,
 ```
 ctrl+x
 ```
