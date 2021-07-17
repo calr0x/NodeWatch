@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # This script checks the logs for "Accepting" which indicates a bid.
-#
 # Setting to change in OT-Settings/config.sh:
 # BID_CHECK_JOB_NOTIFY_ENABLED: Set to false to disable bid notifications (default true)
 # BID_CHECK_INTERVAL: Set this to how far back to search the log for mentions of "Accepting" (default 1 hour).
@@ -28,10 +27,10 @@ if [ $BIDS -eq 0 ]; then
   systemctl restart otnode
 fi
 
-JOBS=$(journalctl -u otnode.service --since "BID_CHECK_INTERVAL" | grep 've been chosen' | wc -l)
+JOBS=$(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep 've been chosen' | wc -l)
 #echo Jobs: $JOBS
 
-OFFER_ID=($(journalctl -u otnode.service --since "BID_CHECK_INTERVAL" | grep 've been chosen' | grep -Eo '0x[a-z0-9]+'))
+OFFER_ID=($(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep 've been chosen' | grep -Eo '0x[a-z0-9]+'))
 
 #echo Array: ${#OFFER_ID[@]}
 if [ $BID_CHECK_JOB_NOTIFY_ENABLED == "true" ]
