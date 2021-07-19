@@ -23,7 +23,7 @@ BIDS=$(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep Accepti
 #echo Bids: $BIDS
 
 if [ $BIDS -eq 0 ]; then
-  /root/OT-NodeWatch/data/send.sh "Has not bid since BID_CHECK_INTERVAL, restarting node"
+  /root/OT-Settings/data/send.sh "Has not bid since BID_CHECK_INTERVAL, restarting node"
   systemctl restart otnode
 fi
 
