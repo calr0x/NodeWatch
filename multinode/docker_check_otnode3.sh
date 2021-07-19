@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # This script includes multiple checks:
-#
 # 1. Checks that the "otnode" docker container is running.
 # 2. Checks if the node has updated in the past 5 minutes
 

@@ -14,8 +14,6 @@
 # To schedule this job in the servers Cron:
 # crontab -e
 # Press "1" (if asked) to select nano as the editor
-# On a new line paste the following:
-# 0 * * * * /root/OT-NodeWatch/bid_check.sh
 
 source /root/OT-Settings/config.sh
 
