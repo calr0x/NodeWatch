@@ -21,7 +21,7 @@ BIDS=$(docker logs otnode3 --since "$BID_CHECK_INTERVAL_DOCKER" | grep Accepting
 #echo Bids: $BIDS
 
 if [ $BIDS -eq 0 ]; then
-  /root/OT-Settings/data/send.sh "Has not bid since $BID_CHECK_INTERVAL_DOCKER, restarting node"
+  /root/OT-Settings/data/send3A.sh "Has not bid since $BID_CHECK_INTERVAL_DOCKER, restarting node"
   docker restart otnode3
 fi
 
@@ -38,6 +38,6 @@ then
     TOKEN_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | jq '.TokenAmountPerHolder' | cut -d'"' -f2))
     JOBTIME_ARRAY=($(curl -sX GET "https://v5api.othub.info/api/Job/detail/$i" -H  "accept: text/plain" | jq '.HoldingTimeInMinutes'))
     DAYS=$(expr ${JOBTIME_ARRAY[@]} / 60 / 24)
-    /root/OT-Settings/data/send.sh "Job awarded: $DAYS days at ${TOKEN_ARRAY[@]} TRAC"
+    /root/OT-Settings/data/send3A.sh "Job awarded: $DAYS days at ${TOKEN_ARRAY[@]} TRAC"
   done
 fi
