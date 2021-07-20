@@ -20,11 +20,14 @@
 source /root/OT-Settings/config.sh
 
 BIDS=$(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep Accepting | wc -l)
+JOBS=$(curl -sX GET "https://v5api.othub.info/api/jobs/jobcreatedcountinperiod?timePeriod=hours&time=1&blockchainID=2")
 #echo Bids: $BIDS
 
 if [ $BIDS -eq 0 ]; then
-  /root/OT-Settings/data/send.sh "Has not bid since $BID_CHECK_INTERVAL, restarting node"
-  systemctl restart otnode
+  if [ $JOBS -ne 0 ]
+    /root/OT-Settings/data/send.sh "Has not bid since $BID_CHECK_INTERVAL and jobs are being issued, restarting node"
+    systemctl restart otnode
+  fi
 fi
 
 JOBS=$(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep 've been chosen' | wc -l)
