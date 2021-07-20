@@ -30,9 +30,6 @@ if [ $BIDS -eq 0 ]; then
   fi
 fi
 
-JOBS=$(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep 've been chosen' | wc -l)
-#echo Jobs: $JOBS
-
 OFFER_ID=($(journalctl -u otnode.service --since "$BID_CHECK_INTERVAL" | grep 've been chosen' | grep -Eo '0x[a-z0-9]+'))
 
 #echo Array: ${#OFFER_ID[@]}
