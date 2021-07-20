@@ -24,7 +24,7 @@ JOBS=$(curl -sX GET "https://v5api.othub.info/api/jobs/jobcreatedcountinperiod?t
 #echo Bids: $BIDS
 
 if [ $BIDS -eq 0 ]; then
-  if [ $JOBS -ne 0 ]
+  if [ $JOBS -ne 0 ]; then
     /root/OT-Settings/data/send.sh "Has not bid since $BID_CHECK_INTERVAL and jobs are being issued, restarting node"
     systemctl restart otnode
   fi
