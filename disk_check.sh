@@ -12,9 +12,9 @@
 
 source /root/OT-Settings/config.sh
 
-SPACE=$(df -m / | grep sda | awk '{print $5}')
-SPACE=$(sed 's|%||' <<< $SPACE)
-echo Disk space is $SPACE% full.
+SPACE=$(df -k / | tail -n 1 | awk '{print $5}' | sed 's|%||')
+
+echo "Disk space is $SPACE% full."
 
 if [ $SPACE -ge $DISK_CHECK_THRESHOLD ]; then
   /root/OT-Settings/data/send.sh "Disk space is $SPACE% full."
